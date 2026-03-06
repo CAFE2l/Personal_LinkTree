@@ -9,190 +9,142 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Space Grotesk', sans-serif;
+        * { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Canvas de estrelas fica fixo atrás de tudo */
+        #starCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
         }
 
-        /* Fundo Azul Escuro Animado */
+        /* Fundo azul escuro animado */
         .galaxy-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -2;
-            background: linear-gradient(135deg, #060d1a, #0a1628, #0d1f3c, #060d1a, #000408);
+            background: linear-gradient(135deg, #020812, #050f20, #07152e, #040c1a, #010408);
             background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
+            animation: gradientFlow 20s ease infinite;
             overflow: hidden;
         }
-        
+
         @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0%   { background-position: 0% 0%; }
+            25%  { background-position: 100% 0%; }
+            50%  { background-position: 100% 100%; }
+            75%  { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
         }
 
-        /* Nebulosa Azul */
+        /* Nebulosa */
         .nebula {
             position: absolute;
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle at 30% 50%, rgba(10, 50, 150, 0.25) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(0, 30, 100, 0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(20, 80, 200, 0.12) 0%, transparent 50%);
-            filter: blur(60px);
-            animation: nebulaMove 30s ease infinite;
+            width: 150%; height: 150%;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(10,50,160,0.28) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 65%, rgba(5,25,100,0.22) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 85%, rgba(15,70,200,0.16) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 20%, rgba(8,40,130,0.2) 0%, transparent 45%);
+            filter: blur(55px);
+            animation: nebulaMove 35s ease infinite;
         }
 
         @keyframes nebulaMove {
-            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
-            33% { transform: translate(5%, 5%) rotate(5deg); }
-            66% { transform: translate(-5%, 10%) rotate(-5deg); }
+            0%, 100% { transform: translate(-10%,-10%) rotate(0deg); }
+            33%       { transform: translate(5%,5%) rotate(4deg); }
+            66%       { transform: translate(-5%,10%) rotate(-4deg); }
         }
 
-        /* Partículas */
-        .tech-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(100, 150, 255, 0.08) 1px, transparent 1px),
-                radial-gradient(circle at 80% 70%, rgba(100, 150, 255, 0.08) 1px, transparent 1px),
-                radial-gradient(circle at 40% 20%, rgba(60, 120, 255, 0.12) 2px, transparent 2px),
-                radial-gradient(circle at 90% 40%, rgba(40, 100, 220, 0.12) 2px, transparent 2px);
-            background-size: 100px 100px, 150px 150px, 200px 200px, 250px 250px;
-            animation: particleFloat 20s linear infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes particleFloat {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(10deg); }
-        }
-
-        /* Onda Digital Azul */
-        .digital-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            background: linear-gradient(180deg, transparent, rgba(20, 60, 180, 0.06));
-            filter: blur(20px);
-            animation: wavePulse 8s ease infinite;
-        }
-
-        @keyframes wavePulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(1); }
-            50% { opacity: 0.6; transform: scaleY(1.2); }
-        }
-
-        /* Efeito Glass Azul */
+        /* Glass */
         .glass-effect {
-            background: rgba(5, 15, 35, 0.45);
+            background: rgba(4,12,30,0.5);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(50, 100, 220, 0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
-                        0 0 0 1px rgba(40, 90, 200, 0.15) inset,
-                        0 0 20px rgba(30, 70, 180, 0.08);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(50,100,220,0.25);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6),
+                        0 0 0 1px rgba(40,90,200,0.12) inset,
+                        0 0 20px rgba(20,60,160,0.08);
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
         }
-        
+
         .glass-effect:hover {
             backdrop-filter: blur(30px) saturate(200%);
             -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border-color: rgba(60, 130, 255, 0.5);
-            box-shadow: 0 20px 60px rgba(20, 60, 200, 0.3),
-                        0 0 40px rgba(30, 80, 220, 0.2),
-                        0 0 0 1px rgba(50, 110, 240, 0.3) inset,
-                        0 0 80px rgba(20, 60, 180, 0.15);
+            border-color: rgba(60,130,255,0.5);
+            box-shadow: 0 20px 60px rgba(15,50,180,0.3),
+                        0 0 40px rgba(25,70,210,0.2),
+                        0 0 0 1px rgba(50,110,240,0.3) inset;
             transform: translateY(-10px);
         }
 
-        /* Efeito LED Quântico Azul */
+        /* LED Quântico */
         .quantum-led {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(40, 90, 200, 0.15);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(5, 15, 35, 0.25);
+            border: 1px solid rgba(40,90,200,0.15);
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+            background: rgba(4,12,30,0.3);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7),
-                        0 0 0 1px rgba(30, 70, 180, 0.1) inset,
-                        0 5px 15px rgba(0, 0, 0, 0.5);
-        }
-        
-        .quantum-led:hover {
-            border-color: rgba(50, 110, 255, 0.3);
-            backdrop-filter: blur(35px) saturate(200%);
-            -webkit-backdrop-filter: blur(35px) saturate(200%);
-            background: rgba(5, 18, 42, 0.35);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8),
-                        0 0 30px rgba(30, 80, 220, 0.2),
-                        0 0 0 1px rgba(50, 110, 240, 0.25) inset,
-                        0 8px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7),
+                        0 0 0 1px rgba(30,70,180,0.08) inset;
         }
 
-        /* Foto de Perfil — LED suave, borda fina */
+        .quantum-led:hover {
+            border-color: rgba(50,110,255,0.35);
+            background: rgba(5,18,42,0.4);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8),
+                        0 0 30px rgba(25,75,210,0.2),
+                        0 0 0 1px rgba(50,110,240,0.25) inset;
+        }
+
+        /* Foto de perfil */
         .cosmic-profile {
             position: relative;
             border-radius: 50%;
             padding: 2px;
             background: linear-gradient(45deg, #1a4fc4, #0e2d7a, #2060d8);
             animation: profilePulse 4s ease-in-out infinite;
-            box-shadow: 0 0 14px rgba(40, 100, 220, 0.35),
-                        0 0 28px rgba(30, 80, 190, 0.15);
+            box-shadow: 0 0 14px rgba(40,100,220,0.35), 0 0 28px rgba(30,80,190,0.15);
             transition: all 0.5s;
         }
-        
+
         @keyframes profilePulse {
-            0%, 100% { 
-                box-shadow: 0 0 14px rgba(40, 100, 220, 0.35),
-                            0 0 28px rgba(30, 80, 190, 0.15);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 20px rgba(50, 120, 240, 0.5),
-                            0 0 40px rgba(30, 80, 200, 0.25);
-                transform: scale(1.03);
-            }
+            0%,100% { box-shadow: 0 0 14px rgba(40,100,220,0.35), 0 0 28px rgba(30,80,190,0.15); transform: scale(1); }
+            50%      { box-shadow: 0 0 22px rgba(50,120,240,0.5),  0 0 42px rgba(30,80,200,0.25); transform: scale(1.03); }
         }
-        
+
         .cosmic-profile:hover {
             transform: scale(1.07) rotate(3deg);
-            box-shadow: 0 0 28px rgba(50, 120, 255, 0.55),
-                        0 0 55px rgba(30, 80, 200, 0.3);
+            box-shadow: 0 0 28px rgba(50,120,255,0.55), 0 0 55px rgba(30,80,200,0.3);
         }
 
         .cosmic-profile img {
             border-radius: 50%;
-            border: 2px solid rgba(40, 100, 220, 0.3);
+            border: 2px solid rgba(40,100,220,0.3);
             transition: all 0.5s;
             filter: brightness(1.05);
         }
-        
+
         .cosmic-profile:hover img {
             filter: brightness(1.15) contrast(1.05);
-            border-color: rgb(24, 147, 255);
+            border-color: rgb(24,147,255);
         }
 
-        /* Banner Dimensional Azul */
+        /* Banner */
         .dimensional-banner {
             position: relative;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
-                        0 0 40px rgba(21, 161, 255, 0.992);
-            transform-style: preserve-3d;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(21,161,255,0.8);
             perspective: 1000px;
             transition: all 0.5s;
-            border: 3px solid rgba(57, 107, 244, 0.789);
-        animation: rgbBorderPulse 3s ease-in-out infinite;
+            border: 2px solid rgba(57,107,244,0.7);
         }
-        
+
         .dimensional-banner::before {
             content: '';
             position: absolute;
@@ -204,273 +156,255 @@
             z-index: -1;
             opacity: 0.45;
         }
-        
+
         @keyframes ledBannerRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
+
         .dimensional-banner:hover {
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8),
-                        0 0 60px rgb(47, 200, 255);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8), 0 0 60px rgb(47,200,255);
             transform: translateY(-5px);
         }
-        
-        .dimensional-banner:hover::before {
-            opacity: 1;
-        }
 
-        .dimensional-banner img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-             background: linear-gradient(135deg, 
-                rgb(38, 128, 255) 0%, 
-                transparent 50%,
-                rgba(81, 122, 255, 0.932) 100%);
-        }
+        .dimensional-banner:hover::before { opacity: 1; }
+
+        .dimensional-banner img { width: 100%; height: 200px; object-fit: cover; }
 
         .banner-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgb(38, 128, 255) 0%, 
-                transparent 0%,
-                rgba(81, 122, 255, 0.932) 100%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg,
+                rgba(30,90,220,0.3) 0%, transparent 50%, rgba(15,50,180,0.2) 100%);
             mix-blend-mode: overlay;
             transition: all 0.5s;
         }
-        
+
         .dimensional-banner:hover .banner-overlay {
-            background: linear-gradient(135deg, 
-                rgb(42, 99, 255) 0%, 
-                transparent 50%,
-                rgba(15, 50, 160, 0.3) 100%);
+            background: linear-gradient(135deg,
+                rgba(40,110,255,0.4) 0%, transparent 50%, rgba(20,60,200,0.3) 100%);
         }
 
-        /* Links Azuis */
-        .quantum-link {
-            position: relative;
-            background-size: 200% 200%;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .quantum-link:hover {
-            transform: translateY(-12px) scale(1.03);
-        }
-        
+        /* Links */
+        .quantum-link { transition: all 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .quantum-link:hover { transform: translateY(-10px) scale(1.03); }
+
         .quantum-link:hover .link-icon {
             transform: scale(1.4) rotate(10deg);
-            filter: drop-shadow(0 0 20px currentColor) brightness(1.3);
+            filter: drop-shadow(0 0 20px rgba(80,150,255,0.8)) brightness(1.3);
         }
-        
+
         .link-icon {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 5px rgba(50, 110, 240, 0.3));
+            transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+            filter: drop-shadow(0 0 5px rgba(50,110,240,0.3));
             margin-right: 8px;
         }
 
-        /* Animações de Entrada */
+        /* Entrada */
         @keyframes quantumEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(50px) scale(0.9);
-                filter: blur(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
+            0%   { opacity:0; transform:translateY(50px) scale(0.9); filter:blur(10px); }
+            100% { opacity:1; transform:translateY(0) scale(1);      filter:blur(0); }
         }
-
-        .quantum-entrance {
-            animation: quantumEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
+        .quantum-entrance { animation: quantumEntrance 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
     </style>
 </head>
 <body class="relative min-h-screen overflow-x-hidden">
-    <!-- Fundo Azul Escuro -->
-    <div class="galaxy-bg">
-        <div class="nebula"></div>
-    </div>
 
-    <!-- Container Principal -->
+    <!-- Fundo -->
+    <div class="galaxy-bg"><div class="nebula"></div></div>
+
+    <!-- Canvas de estrelas -->
+    <canvas id="starCanvas"></canvas>
+
+    <!-- Conteúdo -->
     <div class="container mx-auto px-4 py-8 max-w-2xl relative z-10">
-        <!-- Banner  -->
-        <div class="dimensional-banner mb-8 quantum-entrance" style="animation-delay: 0.1s">
-            <img id="bannerImage" src="./icons/banner.jpg" alt="Banner Galáctico">
+
+        <!-- Banner -->
+        <div class="dimensional-banner mb-8 quantum-entrance" style="animation-delay:0.1s">
+            <img id="bannerImage" src="./icons/banner.jpg" alt="Banner">
             <div class="banner-overlay"></div>
             <input type="file" id="bannerInput" accept="image/*" class="hidden" onchange="updateBanner(this)">
         </div>
 
         <!-- Perfil -->
-        <div class="text-center mb-10 quantum-entrance" style="animation-delay: 0.2s">
+        <div class="text-center mb-10 quantum-entrance" style="animation-delay:0.2s">
             <div class="cosmic-profile w-36 h-36 mx-auto mb-4">
                 <img id="profileImage" class="w-full h-full object-cover" src="./icons/pfp.jpg" alt="Profile">
                 <input type="file" id="profileInput" accept="image/*" class="hidden" onchange="updateProfile(this)">
             </div>
-            
             <h1 id="profileName" class="text-4xl font-bold text-white mb-2" contenteditable="true">Gabriel Felipe</h1>
             <p id="profileBio" class="text-gray-300 max-w-md mx-auto text-lg" contenteditable="true">Full-Stack Developer | Digital Influencer | Web 3 Enthusiast</p>
         </div>
 
-        <!-- Container de Links -->
-        <div id="linksContainer" class="space-y-4 mb-8">
-        </div>
+        <!-- Links -->
+        <div id="linksContainer" class="space-y-4 mb-8"></div>
 
         <!-- Rodapé -->
-        <div class="text-center glass-effect py-4 rounded-xl quantum-entrance" style="animation-delay: 0.5s">
+        <div class="text-center glass-effect py-4 rounded-xl quantum-entrance" style="animation-delay:0.5s">
             <p class="text-gray-400">
                 <i class="fas fa-infinity text-blue-400 mr-2"></i>
-                LinkTree | CAFÉ 
+                LinkTree | CAFÉ
             </p>
         </div>
     </div>
 
     <script>
-        let quantumLinks = [
-            { 
-                title: 'Portfólio', 
-                url: 'https://meuportal.com', 
-                icon: './icons/favicon.jpg',
-                color1: '#1a4fc4', 
-                color2: '#0e2d7a'
-            },
-            { 
-                title: 'Twitter', 
-                url: 'https://twitter.com', 
-                icon: './icons/twitter.jpg',
-                color1: '#1e5cd4', 
-                color2: '#0d2c8a'
-            },
-            { 
-                title: 'LinkedIn', 
-                url: 'https://linkedin.com', 
-                icon: './icons/linkedin.jpg',
-                color1: '#1550c0', 
-                color2: '#0a2870'
-            },
-            { 
-                title: 'GitHub', 
-                url: 'https://github.com', 
-                icon: './icons/github.jpg',
-                color1: '#1a4fc4', 
-                color2: '#0e2d7a'
-            },
-            { 
-                title: 'Youtube', 
-                url: 'https://youtube.com', 
-                icon: './icons/youtube.png',
-                color1: '#1e5cd4', 
-                color2: '#0d2c8a'
-            },
-            { 
-                title: 'Pinterest', 
-                url: 'https://pinterest.com', 
-                icon: './icons/pinterest.png',
-                color1: '#1550c0', 
-                color2: '#0a2870'
-            },
-            { 
-                title: 'Telegram', 
-                url: 'https://telegram.org', 
-                icon: './icons/telegram.jpg',
-                color1: '#1a4fc4', 
-                color2: '#0e2d7a'
-            }
-        ];
-        
-        let currentColor1 = '#1a4fc4';
-        let currentColor2 = '#0e2d7a';
-        let currentPngUrl = '';
+    /* =========================================================
+       STARFIELD — canvas com estrelas piscando + estrelas cadentes
+    ========================================================= */
+    (function () {
+        const canvas = document.getElementById('starCanvas');
+        const ctx    = canvas.getContext('2d');
+        let stars = [], shooters = [], W, H, t = 0;
 
-        function renderQuantumLinks() {
-            const container = document.getElementById('linksContainer');
-            container.innerHTML = '';
-            
-            quantumLinks.forEach((link, index) => {
-                const linkElement = createQuantumLink(link, index);
-                linkElement.style.animation = `quantumEntrance 0.5s forwards ${index * 0.1}s`;
-                linkElement.style.opacity = '0';
-                container.appendChild(linkElement);
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+
+        function mkStars(n) {
+            stars = Array.from({ length: n }, () => {
+                const s = Math.random();
+                return {
+                    x:     Math.random() * W,
+                    y:     Math.random() * H,
+                    r:     0.3 + s * 1.5,
+                    base:  0.2  + s * 0.6,
+                    spd:   0.003 + s * 0.01,
+                    ph:    Math.random() * Math.PI * 2,
+                    blue:  Math.random() > 0.65   // tom levemente azulado
+                };
             });
         }
 
-        function createQuantumLink(link, index) {
-            const div = document.createElement('div');
-            div.className = 'relative group';
-            
-            const gradientStyle = `linear-gradient(135deg, ${link.color1}, ${link.color2})`;
-            
-            const isImage = link.icon.includes('.png') || link.icon.includes('.jpg') || link.icon.includes('.jpeg') || link.icon.includes('.gif') || link.icon.includes('.svg') || link.icon.includes('http');
-            
-            div.innerHTML = `
-                <div class="glass-effect quantum-led rounded-xl p-[2px] quantum-link">
-                    <a href="${link.url}" target="_blank" class="block relative overflow-hidden rounded-lg">
-                        <div class="absolute inset-0 opacity-30 mix-blend-overlay" style="background: ${gradientStyle}; background-size: cover; background-blend-mode: overlay;"></div>
-                        <div class="relative px-6 py-5 flex items-center gap-4 text-white">
-                            ${isImage ? 
-                                `<img src="${link.icon}" class="w-10 h-10 object-contain link-icon" alt="icon">` : 
-                                `<i class="${link.icon} text-3xl link-icon" style="color: ${link.color1};"></i>`
-                            }
-                            <span class="font-medium text-lg">${link.title}</span>
-                        </div>
-                    </a>
-                </div>
-            `;
-            
-            return div;
-        }
-
-        function addNewLink() {
-            const title = prompt('Nome do portal dimensional:', '');
-            if (!title) return;
-            const url = prompt('URL do portal:', 'https://');
-            if (!url) return;
-            const icon = prompt('Ícone (ex: fas fa-star):', 'fas fa-link');
-            quantumLinks.push({ title, url, icon: icon || 'fas fa-link', color1: currentColor1, color2: currentColor2 });
-            renderQuantumLinks();
-        }
-
-        function updateBanner(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => document.getElementById('bannerImage').src = e.target.result;
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function updateProfile(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => document.getElementById('profileImage').src = e.target.result;
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function showQuantumNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 glass-effect text-white px-6 py-4 rounded-xl z-50 flex items-center gap-3 text-lg';
-            notification.style.animation = 'quantumEntrance 0.3s forwards';
-            notification.innerHTML = `<i class="fas fa-atom text-blue-400"></i><span>${message}</span>`;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.style.animation = 'quantumEntrance 0.3s reverse forwards';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderQuantumLinks();
-            document.querySelectorAll('.quantum-entrance').forEach((el, i) => {
-                el.style.animationDelay = (i * 0.1) + 's';
+        function spawnShooter() {
+            shooters.push({
+                x:     Math.random() * W * 0.85,
+                y:     Math.random() * H * 0.35,
+                len:   90 + Math.random() * 130,
+                spd:   7  + Math.random() * 9,
+                alpha: 1,
+                ang:   Math.PI / 5 + (Math.random() - 0.5) * 0.35
             });
+        }
+
+        function scheduleShooter() {
+            setTimeout(() => { spawnShooter(); scheduleShooter(); },
+                       2000 + Math.random() * 5000);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            t += 0.016;
+
+            /* estrelas fixas */
+            for (const s of stars) {
+                const a = s.base + Math.sin(t * s.spd * 60 + s.ph) * (s.base * 0.55);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = s.blue
+                    ? `rgba(180,215,255,${a})`
+                    : `rgba(255,255,255,${a})`;
+                ctx.fill();
+            }
+
+            /* estrelas cadentes */
+            shooters = shooters.filter(s => s.alpha > 0);
+            for (const s of shooters) {
+                const dx = Math.cos(s.ang) * s.len;
+                const dy = Math.sin(s.ang) * s.len;
+                const g  = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
+                g.addColorStop(0, `rgba(200,230,255,${s.alpha})`);
+                g.addColorStop(1, `rgba(200,230,255,0)`);
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s.x - dx, s.y - dy);
+                ctx.strokeStyle = g;
+                ctx.lineWidth   = 1.5;
+                ctx.stroke();
+                s.x     += Math.cos(s.ang) * s.spd;
+                s.y     += Math.sin(s.ang) * s.spd;
+                s.alpha -= 0.02;
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => { resize(); mkStars(300); });
+        resize();
+        mkStars(300);
+        scheduleShooter();
+        draw();
+    })();
+
+    /* =========================================================
+       LINKS
+    ========================================================= */
+    const quantumLinks = [
+        { title:'Portfólio', url:'https://main-portfolio-sigma-flame.vercel.app/',       icon:'./icons/favicon.jpg',   color1:'#1a4fc4', color2:'#0e2d7a' },
+        { title:'Twitter',   url:'https://x.com/ct_cafe87877',  icon:'./icons/twitter.jpg',   color1:'#1e5cd4', color2:'#0d2c8a' },
+        { title:'LinkedIn',  url:'https://www.linkedin.com/in/gabriel-felipe-sabino-de-souza-ab05a630a/',        icon:'./icons/linkedin.jpg',  color1:'#1550c0', color2:'#0a2870' },
+        { title:'GitHub',    url:'https://github.com/CAFE2l',          icon:'./icons/github.jpg',    color1:'#1a4fc4', color2:'#0e2d7a' },
+        { title:'Youtube',   url:'https://www.youtube.com/@CAFE_ct',         icon:'./icons/youtube.png',   color1:'#1e5cd4', color2:'#0d2c8a' },
+        { title:'Pinterest', url:'https://br.pinterest.com/abbass11king11duolingo/',       icon:'./icons/pinterest.png', color1:'#1550c0', color2:'#0a2870' },
+        { title:'Telegram',  url:'https://t.me/cafect2l',        icon:'./icons/telegram.jpg',  color1:'#1a4fc4', color2:'#0e2d7a' },
+        { title:'Discord',  url:'https://discord.com/invite/gW2tShPFxf',        icon:'./icons/discord.jpg',  color1:'#1a4fc4', color2:'#0e2d7a' }
+    ];
+
+    function renderLinks() {
+        const c = document.getElementById('linksContainer');
+        c.innerHTML = '';
+        quantumLinks.forEach((link, i) => {
+            const el = makeLink(link);
+            el.style.animation = `quantumEntrance 0.5s forwards ${i * 0.1}s`;
+            el.style.opacity   = '0';
+            c.appendChild(el);
         });
+    }
+
+    function makeLink(link) {
+        const div  = document.createElement('div');
+        div.className = 'relative group';
+        const grad = `linear-gradient(135deg,${link.color1},${link.color2})`;
+        const isImg = /\.(png|jpe?g|gif|svg)$/i.test(link.icon) || link.icon.startsWith('http');
+        div.innerHTML = `
+            <div class="glass-effect quantum-led rounded-xl p-[2px] quantum-link">
+                <a href="${link.url}" target="_blank" class="block relative overflow-hidden rounded-lg">
+                    <div class="absolute inset-0 opacity-25 mix-blend-overlay" style="background:${grad}"></div>
+                    <div class="relative px-6 py-5 flex items-center gap-4 text-white">
+                        ${isImg
+                            ? `<img src="${link.icon}" class="w-10 h-10 object-contain link-icon" alt="icon">`
+                            : `<i class="${link.icon} text-3xl link-icon" style="color:${link.color1}"></i>`}
+                        <span class="font-medium text-lg">${link.title}</span>
+                    </div>
+                </a>
+            </div>`;
+        return div;
+    }
+
+    function updateBanner(input) {
+        if (input.files?.[0]) {
+            const r = new FileReader();
+            r.onload = e => document.getElementById('bannerImage').src = e.target.result;
+            r.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    function updateProfile(input) {
+        if (input.files?.[0]) {
+            const r = new FileReader();
+            r.onload = e => document.getElementById('profileImage').src = e.target.result;
+            r.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderLinks();
+        document.querySelectorAll('.quantum-entrance').forEach((el, i) => {
+            el.style.animationDelay = (i * 0.1) + 's';
+        });
+    });
     </script>
 </body>
 </html>
