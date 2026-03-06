@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkTree Galáctica | Tech Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Fundo Galáctico Animado */
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(180deg, #1a2332 0%, #2c3e50 20%, #34495e 40%, #2c3e50 60%, #1a1a1a 80%, #000000 100%);
+            overflow: hidden;
+        }
+
+
+
+        /* Nebulosa */
+        .nebula {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 30% 50%, rgba(76, 0, 255, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+            filter: blur(60px);
+            animation: nebulaMove 30s ease infinite;
+        }
+
+        @keyframes nebulaMove {
+            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+            33% { transform: translate(5%, 5%) rotate(5deg); }
+            66% { transform: translate(-5%, 10%) rotate(-5deg); }
+        }
+
+        /* Partículas Tecnológicas */
+        .tech-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 20%, rgba(100, 200, 255, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 90% 40%, rgba(255, 100, 200, 0.15) 2px, transparent 2px);
+            background-size: 100px 100px, 150px 150px, 200px 200px, 250px 250px;
+            animation: particleFloat 20s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(10deg); }
+        }
+
+        /* Onda Digital */
+        .digital-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.05));
+            filter: blur(20px);
+            animation: wavePulse 8s ease infinite;
+        }
+
+        @keyframes wavePulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.6; transform: scaleY(1.2); }
+        }
+
+        /* Efeito Glass Aprimorado */
+        .glass-effect {
+            background: rgba(10, 10, 20, 0.3);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 140, 0, 0.1) inset;
+            transition: all 0.4s ease;
+        }
+        
+        .glass-effect:hover {
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            box-shadow: 0 20px 50px rgba(255, 140, 0, 0.3),
+                        0 0 30px rgba(255, 140, 0, 0.2),
+                        0 0 0 2px rgba(255, 140, 0, 0.3) inset;
+            transform: translateY(-5px);
+        }
+
+        /* Efeito LED Quântico */
+        .quantum-led {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 140, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .quantum-led:hover {
+            border-color: rgba(255, 140, 0, 0.5);
+        }
+
+        /* Foto de Perfil com Efeito Cósmico */
+        .cosmic-profile {
+            position: relative;
+            border-radius: 50%;
+            padding: 4px;
+            background: rgba(255, 140, 0, 0.3);
+        }
+
+        .cosmic-profile img {
+            border-radius: 50%;
+            border: 3px solid rgba(255, 140, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        /* Banner com Efeito Dimensional */
+        .dimensional-banner {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .dimensional-banner img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 255, 0.2) 0%, 
+                transparent 50%,
+                rgba(255, 0, 255, 0.2) 100%);
+            mix-blend-mode: overlay;
+        }
+
+        /* Links com Degradê Quântico */
+        .quantum-link {
+            position: relative;
+            background-size: 200% 200%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .quantum-link:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        .quantum-link:hover .link-icon {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 15px currentColor);
+        }
+        
+        .link-icon {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+        /* Animações de Entrada */
+        @keyframes quantumEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .quantum-entrance {
+            animation: quantumEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+
+    </style>
+</head>
+<body class="relative min-h-screen overflow-x-hidden">
+    <!-- Fundo Galáctico -->
+    <div class="galaxy-bg">
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="container mx-auto px-4 py-8 max-w-2xl relative z-10">
+        <!-- Banner Dimensional -->
+        <div class="dimensional-banner mb-8 quantum-entrance" style="animation-delay: 0.1s">
+            <img id="bannerImage" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=2027&q=80" alt="Banner Galáctico">
+            <div class="banner-overlay"></div>
+            <input type="file" id="bannerInput" accept="image/*" class="hidden" onchange="updateBanner(this)">
+        </div>
+
+        <!-- Perfil Cósmico -->
+        <div class="text-center mb-10 quantum-entrance" style="animation-delay: 0.2s">
+            <div class="cosmic-profile w-36 h-36 mx-auto mb-4">
+                <img id="profileImage" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1531427186799-35f3a3024b7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80" alt="Profile">
+                <input type="file" id="profileInput" accept="image/*" class="hidden" onchange="updateProfile(this)">
+            </div>
+            
+            <h1 id="profileName" class="text-4xl font-bold text-white mb-2" contenteditable="true">Gabriel Felipe</h1>
+            <p id="profileBio" class="text-gray-300 max-w-md mx-auto text-lg" contenteditable="true">Full-Stack Developer | Digital Influencer | Web 3 Enthusiast</p>
+        </div>
+
+        <!-- Container de Links -->
+        <div id="linksContainer" class="space-y-4 mb-8">
+            <!-- Links serão inseridos via JavaScript -->
+        </div>
+
+       
+        <!-- Rodapé Cósmico -->
+        <div class="text-center glass-effect py-4 rounded-xl quantum-entrance" style="animation-delay: 0.5s">
+            <p class="text-gray-400">
+                <i class="fas fa-infinity text-cyan-400 mr-2"></i>
+                LinkTree | CAFÉ 
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Estado Quântico
+        let quantumLinks = [
+            { 
+                title: 'Portfólio', 
+                url: 'https://meuportal.com', 
+                icon: './icons/portfolio.png',  // Pode ser: './icons/seu-icone.png' ou 'fas fa-coffee'
+                color1: '#ff8c00', 
+                color2: '#ff4500'
+            },
+            { 
+                title: 'Twitter', 
+                url: 'https://twitter.com', 
+                icon: './icons/twitter.jpg',  // Pode ser: './icons/twitter.jpg' ou 'fab fa-twitter'
+                color1: '#ff6b6b', 
+                color2: '#ee5a6f'
+            },
+            { 
+                title: 'LinkedIn', 
+                url: 'https://linkedin.com', 
+                icon: './icons/linkedin.jpg',  // Pode ser: './icons/linkedin.png' ou 'fab fa-linkedin'
+                color1: '#ffa500', 
+                color2: '#ff8c00'
+            },
+            { 
+                title: 'GitHub', 
+                url: 'https://github.com', 
+                icon: './icons/github.jpg',  // Pode ser: './icons/github.jpg' ou 'fab fa-github'
+                color1: '#ff7f50', 
+                color2: '#ff6347'
+            },
+             { 
+                title: 'Youtube', 
+                url: 'https://linkedin.com', 
+                icon: './icons/youtube.png',  // Pode ser: './icons/linkedin.png' ou 'fab fa-linkedin'
+                color1: '#ffa500', 
+                color2: '#ff8c00'
+            },
+             { 
+                title: 'LinkedIn', 
+                url: 'https://linkedin.com', 
+                icon: './icons/pinterest.png',  // Pode ser: './icons/linkedin.png' ou 'fab fa-linkedin'
+                color1: '#ffa500', 
+                color2: '#ff8c00'
+            },
+             { 
+                title: 'LinkedIn', 
+                url: 'https://linkedin.com', 
+                icon: './icons/telegram.jpg',  // Pode ser: './icons/linkedin.png' ou 'fab fa-linkedin'
+                color1: '#ffa500', 
+                color2: '#ff8c00'
+            }
+        ];
+        
+        let currentColor1 = '#00ffff';
+        let currentColor2 = '#ff00ff';
+        let currentPngUrl = '';
+
+        // Renderizar Links Quânticos
+        function renderQuantumLinks() {
+            const container = document.getElementById('linksContainer');
+            container.innerHTML = '';
+            
+            quantumLinks.forEach((link, index) => {
+                const linkElement = createQuantumLink(link, index);
+                linkElement.style.animation = `quantumEntrance 0.5s forwards ${index * 0.1}s`;
+                linkElement.style.opacity = '0';
+                container.appendChild(linkElement);
+            });
+        }
+
+        // Criar Link Quântico
+        function createQuantumLink(link, index) {
+            const div = document.createElement('div');
+            div.className = 'relative group';
+            
+            const gradientStyle = `linear-gradient(135deg, ${link.color1}, ${link.color2})`;
+            
+            // Detecta se é imagem (PNG/JPG) ou ícone Font Awesome
+            const isImage = link.icon.includes('.png') || link.icon.includes('.jpg') || link.icon.includes('.jpeg') || link.icon.includes('.gif') || link.icon.includes('.svg') || link.icon.includes('http');
+            
+            div.innerHTML = `
+                <div class="glass-effect quantum-led rounded-xl p-[2px] quantum-link">
+                    <a href="${link.url}" target="_blank" class="block relative overflow-hidden rounded-lg">
+                        <div class="absolute inset-0 opacity-30 mix-blend-overlay" style="background: ${gradientStyle}; background-size: cover; background-blend-mode: overlay;"></div>
+                        <div class="relative px-6 py-5 flex items-center gap-4 text-white">
+                            ${isImage ? 
+                                `<img src="${link.icon}" class="w-10 h-10 object-contain link-icon" alt="icon">` : 
+                                `<i class="${link.icon} text-3xl link-icon" style="color: ${link.color1};"></i>`
+                            }
+                            <span class="font-medium text-lg">${link.title}</span>
+                        </div>
+                    </a>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Adicionar Novo Link
+        function addNewLink() {
+            const title = prompt('Nome do portal dimensional:', '');
+            if (!title) return;
+            
+            const url = prompt('URL do portal:', 'https://');
+            if (!url) return;
+            
+            const icon = prompt('Ícone (ex: fas fa-star):', 'fas fa-link');
+            
+            const newLink = {
+                title: title,
+                url: url,
+                icon: icon || 'fas fa-link',
+                color1: currentColor1,
+                color2: currentColor2,
+                imageUrl: currentPngUrl
+            };
+            
+            quantumLinks.push(newLink);
+            renderQuantumLinks();
+            showQuantumNotification('⚡ Portal dimensional criado!');
+        }
+
+        // Editar Link
+        function editQuantumLink(index) {
+            const link = quantumLinks[index];
+            const newTitle = prompt('Editar nome do portal:', link.title);
+            if (newTitle) link.title = newTitle;
+            
+            const newUrl = prompt('Editar URL:', link.url);
+            if (newUrl) link.url = newUrl;
+            
+            renderQuantumLinks();
+            showQuantumNotification('🌀 Portal atualizado!');
+        }
+
+        // Deletar Link
+        function deleteQuantumLink(index) {
+            if (confirm('💫 Deseja realmente destruir este portal?')) {
+                quantumLinks.splice(index, 1);
+                renderQuantumLinks();
+                showQuantumNotification('💥 Portal destruído!');
+            }
+        }
+
+        // Atualizar Banner
+        function updateBanner(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('bannerImage').src = e.target.result;
+                    showQuantumNotification('🌌 Banner dimensional alterado!');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Atualizar Perfil
+        function updateProfile(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                    showQuantumNotification('✨ Avatar cósmico atualizado!');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Definir Cor do Degradê
+        function setGradientColor(color1, color2) {
+            currentColor1 = color1;
+            currentColor2 = color2;
+            showQuantumNotification('🎨 Cores dimensionais definidas!');
+        }
+
+        // Definir URL do PNG
+        function setPngUrl(url) {
+            document.getElementById('pngUrlInput').value = url;
+            currentPngUrl = url;
+            showQuantumNotification('🔮 Ícone dimensional selecionado!');
+        }
+
+        // Aplicar PNG a todos os links
+        function applyPngToAll() {
+            const url = document.getElementById('pngUrlInput').value;
+            if (url) {
+                currentPngUrl = url;
+                quantumLinks = quantumLinks.map(link => ({
+                    ...link,
+                    imageUrl: url
+                }));
+                renderQuantumLinks();
+                showQuantumNotification('🖼️ Ícone aplicado a todos os portais!');
+            }
+        }
+
+        // Aplicar Personalizações Quânticas
+        function applyQuantumCustomizations() {
+            const pngUrl = document.getElementById('pngUrlInput').value;
+            const ownerName = document.getElementById('profileName').textContent;
+            
+            if (pngUrl) currentPngUrl = pngUrl;
+            
+            quantumLinks = quantumLinks.map(link => ({
+                ...link,
+                color1: currentColor1,
+                color2: currentColor2,
+                imageUrl: currentPngUrl || link.imageUrl
+            }));
+            
+            renderQuantumLinks();
+            showQuantumNotification('⚡ Configurações quânticas aplicadas!');
+        }
+
+        // Toggle Painel Quântico
+        function toggleQuantumPanel() {
+            const panel = document.getElementById('quantumPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                panel.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Atualizar Contador de Links
+        function updateLinkCounter() {
+            document.getElementById('linkCounter').textContent = quantumLinks.length + ' links dimensionais';
+        }
+
+        // Notificação Quântica
+        function showQuantumNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 glass-effect text-white px-6 py-4 rounded-xl z-50 flex items-center gap-3 text-lg';
+            notification.style.animation = 'quantumEntrance 0.3s forwards';
+            notification.innerHTML = `
+                <i class="fas fa-atom text-cyan-400"></i>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'quantumEntrance 0.3s reverse forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuantumLinks();
+            
+            // Animações de entrada para elementos existentes
+            document.querySelectorAll('.quantum-entrance').forEach((el, i) => {
+                el.style.animationDelay = (i * 0.1) + 's';
+            });
+        });
+
+        // Adicionar estilos dinâmicos
+        const style = document.createElement('style');
+        style.textContent = `
+            .drop-shadow-glow {
+                filter: drop-shadow(0 0 10px currentColor);
+            }
+            
+            @keyframes gradientMove {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
