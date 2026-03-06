@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkTree Galáctica | Tech Edition</title>
+    <title> Linktree</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="./icons/test.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -175,7 +176,7 @@
         
         .cosmic-profile:hover img {
             filter: brightness(1.15) contrast(1.05);
-            border-color: rgba(60, 130, 255, 0.6);
+            border-color: rgb(24, 147, 255);
         }
 
         /* Banner Dimensional Azul */
@@ -184,10 +185,12 @@
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
-                        0 0 40px rgba(20, 60, 180, 0.15);
+                        0 0 40px rgba(21, 161, 255, 0.992);
             transform-style: preserve-3d;
             perspective: 1000px;
             transition: all 0.5s;
+            border: 3px solid rgba(57, 107, 244, 0.789);
+        animation: rgbBorderPulse 3s ease-in-out infinite;
         }
         
         .dimensional-banner::before {
@@ -210,19 +213,22 @@
         
         .dimensional-banner:hover {
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8),
-                        0 0 60px rgba(30, 80, 220, 0.3);
+                        0 0 60px rgb(47, 200, 255);
             transform: translateY(-5px);
         }
         
         .dimensional-banner:hover::before {
-            opacity: 0.65;
+            opacity: 1;
         }
 
         .dimensional-banner img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            filter: brightness(0.85) saturate(0.7) hue-rotate(200deg);
+             background: linear-gradient(135deg, 
+                rgb(38, 128, 255) 0%, 
+                transparent 50%,
+                rgba(81, 122, 255, 0.932) 100%);
         }
 
         .banner-overlay {
@@ -232,16 +238,16 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, 
-                rgba(20, 60, 180, 0.25) 0%, 
-                transparent 50%,
-                rgba(10, 40, 140, 0.2) 100%);
+                rgb(38, 128, 255) 0%, 
+                transparent 0%,
+                rgba(81, 122, 255, 0.932) 100%);
             mix-blend-mode: overlay;
             transition: all 0.5s;
         }
         
         .dimensional-banner:hover .banner-overlay {
             background: linear-gradient(135deg, 
-                rgba(30, 80, 220, 0.35) 0%, 
+                rgb(42, 99, 255) 0%, 
                 transparent 50%,
                 rgba(15, 50, 160, 0.3) 100%);
         }
@@ -295,9 +301,9 @@
 
     <!-- Container Principal -->
     <div class="container mx-auto px-4 py-8 max-w-2xl relative z-10">
-        <!-- Banner -->
+        <!-- Banner  -->
         <div class="dimensional-banner mb-8 quantum-entrance" style="animation-delay: 0.1s">
-            <img id="bannerImage" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=2027&q=80" alt="Banner Galáctico">
+            <img id="bannerImage" src="./icons/banner.jpg" alt="Banner Galáctico">
             <div class="banner-overlay"></div>
             <input type="file" id="bannerInput" accept="image/*" class="hidden" onchange="updateBanner(this)">
         </div>
